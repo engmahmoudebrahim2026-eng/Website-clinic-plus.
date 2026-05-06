@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img 1.jpg" type="image/x-icon">
+  <meta name="description"
+    content="We aim to provide valuable and useful information about Clinic NEXUS AI where we offer rich and diverse content that meets the needs of  our visitors and helps them better understand the topic">
+  <meta name="outhor" content=" Mahmoud Ebrahim">
+  <meta name="keywords" content="Html,css,JS,Coding Html and css">
+  <title>Clinic+ | منصة الرعاية الصحية الذكية</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- TOAST -->
+  <div id="toastWrap"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg sticky-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" onclick="navigate('home')">Clinic<span>+</span></a>
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navCollapse">
+        <i class="fas fa-bars" style="color:var(--primary)"></i>
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navCollapse">
+        <ul class="navbar-nav me-auto mt-2 mt-lg-0 gap-1" id="mainNavLinks">
+          <li><a class="nav-link" data-page="home" onclick="navigate('home')"><i
+                class="fas fa-home fa-sm me-1"></i>الرئيسية</a></li>
+          <li><a class="nav-link" data-page="booking" onclick="navigate('booking')"><i
+                class="fas fa-calendar-check fa-sm me-1"></i>احجز دكتور</a></li>
+          <li><a class="nav-link" data-page="prescription" onclick="navigate('prescription')"><i
+                class="fas fa-file-prescription fa-sm me-1"></i>روشتتي</a></li>
+          <li><a class="nav-link" data-page="pharmacy" onclick="navigate('pharmacy')"><i
+                class="fas fa-capsules fa-sm me-1"></i>الصيدليات</a></li>
+          <li><a class="nav-link" data-page="medfile" onclick="navigate('medfile')"><i
+                class="fas fa-folder-heart fa-sm me-1"></i>ملفي الطبي</a></li>
+          <li><a class="nav-link" data-page="ai" onclick="navigate('ai')"><i class="fas fa-robot fa-sm me-1"></i>مساعد
+              AI</a></li>
+          <li><a class="nav-link" data-page="rating" onclick="navigate('rating')"><i
+                class="fas fa-star fa-sm me-1"></i>التقييم</a></li>
+        </ul>
+        <div class="d-flex gap-2 align-items-center mt-2 mt-lg-0" id="navAuth">
+          <div id="navLoggedOut">
+            <button class="btn-nav-outline" onclick="navigate('login')"><i
+                class="fas fa-sign-in-alt me-1"></i>دخول</button>
+            <button class="btn-nav-filled ms-2" onclick="navigate('register')"><i class="fas fa-user-plus me-1"></i>سجل
+              مجاناً</button>
+          </div>
+          <div id="navLoggedIn" style="display:none">
+            <span class="me-2 text-muted small" id="navUserName"></span>
+            <button class="btn-nav-outline" onclick="logout()"><i class="fas fa-sign-out-alt me-1"></i>خروج</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!--                     PAGES CONTAINER                          -->
+  <!-- ============================================================ -->
+  <div id="appContainer">
+
+    <!-- ===================== HOME PAGE ===================== -->
+    <div class="page" id="page-home">
+      <!-- HERO -->
+      <section class="hero-section">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-circle c1"></div>
+        <div class="hero-circle c2"></div>
+        <div class="container position-relative">
+          <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+              <div class="hero-badge"><i class="fas fa-shield-heart me-2"></i>منصة #1 للرعاية الصحية في مصر</div>
+              <h1 class="hero-title">صحتك في إيدك،<br><span class="hero-accent">احجز دلوقتي</span> 🏥</h1>
+              <p class="hero-desc">احجز عند أفضل الدكاترة، استلم روشتتك إلكترونية، واطلب دواءك من الصيدلية — كل ده في
+                مكان واحد آمن وسهل.</p>
+              <div class="d-flex gap-3 flex-wrap">
+                <button class="btn-hero-primary" onclick="navigate('booking')"><i class="fas fa-search me-2"></i>ابحث عن
+                  دكتور</button>
+                <button class="btn-hero-ghost" onclick="navigate('ai')"><i class="fas fa-robot me-2"></i>مساعد AI
+                  مجاني</button>
+              </div>
+              <div class="hero-trust mt-4">
+                <span><i class="fas fa-check-circle text-success me-1"></i>مجاني للمرضى</span>
+                <span class="mx-3"><i class="fas fa-lock text-primary me-1"></i>بياناتك محمية</span>
+                <span><i class="fas fa-clock text-warning me-1"></i>متاح 24/7</span>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="hero-search-card">
+                <div class="hsc-head"><i class="fas fa-stethoscope me-2"></i>ابحث عن دكتور الآن</div>
+                <div class="hsc-body">
+                  <div class="mb-3">
+                    <label class="form-label-c">المحافظة</label>
+                    <select class="form-select-c" id="heroGov">
+                      <option value="">-- اختار محافظتك --</option>
+                      <option>القاهرة</option>
+                      <option>الجيزة</option>
+                      <option>الإسكندرية</option>
+                      <option>أسيوط</option>
+                      <option>المنيا</option>
+                      <option>سوهاج</option>
+                      <option>الأقصر</option>
+                      <option>أسوان</option>
+                      <option>الشرقية</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label-c">التخصص</label>
+                    <select class="form-select-c" id="heroSpec">
+                      <option value="">-- اختار التخصص --</option>
+                      <option>باطنة</option>
+                      <option>أطفال</option>
+                      <option>أسنان</option>
+                      <option>عيون</option>
+                      <option>جلدية</option>
+                      <option>قلب وأوعية دموية</option>
+                      <option>عظام</option>
+                      <option>نساء وتوليد</option>
+                      <option>أنف وأذن وحنجرة</option>
+                    </select>
+                  </div>
+                  <button class="btn-primary-full" onclick="heroSearch()"><i class="fas fa-search me-2"></i>ابحث
+                    دلوقتي</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STATS -->
+      <section class="stats-section">
+        <div class="container">
+          <div class="row g-4">
+            <div class="col-6 col-md-3">
+              <div class="stat-card sc1">
+                <div class="stat-icon"><i class="fas fa-user-md"></i></div>
+                <div class="stat-num" data-target="1250">0</div>
+                <div class="stat-lbl">دكتور متخصص</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="stat-card sc2">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-num" data-target="32000">0</div>
+                <div class="stat-lbl">مريض مسجل</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="stat-card sc3">
+                <div class="stat-icon"><i class="fas fa-capsules"></i></div>
+                <div class="stat-num" data-target="480">0</div>
+                <div class="stat-lbl">صيدلية شريكة</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="stat-card sc4">
+                <div class="stat-icon"><i class="fas fa-star"></i></div>
+                <div class="stat-num" data-target="4.9">0</div>
+                <div class="stat-lbl">متوسط التقييم</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES -->
+      <section class="features-section">
+        <div class="container">
+          <div class="sec-header">
+            <div class="sec-badge"><i class="fas fa-sparkles me-1"></i>مميزات المنصة</div>
+            <h2 class="sec-title">كل اللي محتاجه في مكان واحد</h2>
+            <p class="sec-sub">من الحجز لحد استلام الدواء — رحلة صحية كاملة</p>
+          </div>
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <div class="feat-card fc1">
+                <div class="feat-icon"><i class="fas fa-calendar-check"></i></div>
+                <h5>حجز سهل وسريع</h5>
+                <p>احجز في 3 خطوات بس. اختار المحافظة، التخصص، والموعد المناسب ليك.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="feat-card fc2">
+                <div class="feat-icon"><i class="fas fa-file-prescription"></i></div>
+                <h5>روشتة إلكترونية</h5>
+                <p>روشتتك محفوظة في حسابك. واضحة، مقروءة، ومتاحة في أي وقت.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="feat-card fc3">
+                <div class="feat-icon"><i class="fas fa-truck-fast"></i></div>
+                <h5>توصيل الدواء</h5>
+                <p>اطلب أدويتك من أقرب صيدلية وبتوصلك على بابك في أسرع وقت.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="feat-card fc4">
+                <div class="feat-icon"><i class="fas fa-folder-heart"></i></div>
+                <h5>ملف طبي شامل</h5>
+                <p>تاريخك الطبي كامل: الأمراض، الحساسية، الروشتات، والتحاليل.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="feat-card fc5">
+                <div class="feat-icon"><i class="fas fa-robot"></i></div>
+                <h5>مساعد AI ذكي</h5>
+                <p>يشرح روشتتك بطريقة سهلة ويجاوب على أسئلتك الطبية بالعربي.</p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="feat-card fc6">
+                <div class="feat-icon"><i class="fas fa-star"></i></div>
+                <h5>تقييم الدكاترة</h5>
+                <p>قيّم دكتورك بعد الكشف وساعد ناس تاني يختاروا أحسن دكتور.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOP DOCTORS -->
+      <section class="doctors-home-section">
+        <div class="container">
+          <div class="sec-header">
+            <div class="sec-badge"><i class="fas fa-award me-1"></i>الأعلى تقييماً</div>
+            <h2 class="sec-title">أفضل الدكاترة على المنصة</h2>
+            <p class="sec-sub">اختار من أفضل الأطباء المعتمدين</p>
+          </div>
+          <div class="row g-4" id="homeDocList"></div>
+          <div class="text-center mt-5">
+            <button class="btn-view-all" onclick="navigate('booking')"><i class="fas fa-th-large me-2"></i>عرض جميع
+              الدكاترة <i class="fas fa-arrow-left ms-2"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section class="how-section">
+        <div class="container">
+          <div class="sec-header">
+            <div class="sec-badge"><i class="fas fa-route me-1"></i>كيف يعمل؟</div>
+            <h2 class="sec-title">3 خطوات بسيطة</h2>
+          </div>
+          <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+              <div class="how-card">
+                <div class="how-num">1</div>
+                <div class="how-icon"><i class="fas fa-search"></i></div>
+                <h5>ابحث</h5>
+                <p>اختار محافظتك والتخصص اللي محتاجه</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="how-card">
+                <div class="how-num">2</div>
+                <div class="how-icon"><i class="fas fa-calendar-plus"></i></div>
+                <h5>احجز</h5>
+                <p>اختار الدكتور والموعد المناسب وأكد الحجز</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="how-card">
+                <div class="how-num">3</div>
+                <div class="how-icon"><i class="fas fa-file-prescription"></i></div>
+                <h5>استلم روشتتك</h5>
+                <p>بعد الكشف استلم روشتتك إلكترونياً واطلب الدواء</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta-section">
+        <div class="cta-blob b1"></div>
+        <div class="cta-blob b2"></div>
+        <div class="container position-relative text-center">
+          <h2>جاهز تبدأ رحلتك الصحية؟</h2>
+          <p>انضم لـ+32,000 مريض بيثقوا في Clinic+</p>
+          <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <button class="btn-cta-w" onclick="navigate('register')"><i class="fas fa-user-plus me-2"></i>سجل
+              مجاناً</button>
+            <button class="btn-cta-g" onclick="navigate('booking')"><i class="fas fa-calendar-check me-2"></i>احجز
+              دلوقتي</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===================== LOGIN PAGE ===================== -->
+    <div class="page" id="page-login">
+      <div class="auth-wrapper">
+        <div class="auth-card">
+          <div class="auth-logo" onclick="navigate('home')">Clinic<span>+</span></div>
+          <h4 class="auth-title">أهلاً بيك مجدداً! 👋</h4>
+          <p class="auth-sub">سجل دخولك للوصول لحسابك الطبي</p>
+          <div id="loginError" class="alert-error d-none"></div>
+          <div class="mb-3">
+            <label class="form-label-c">البريد الإلكتروني</label>
+            <div class="inp-group"><i class="fas fa-envelope"></i><input type="email" id="loginEmail" class="form-inp"
+                placeholder="example@email.com"></div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label-c">كلمة المرور</label>
+            <div class="inp-group"><i class="fas fa-lock"></i><input type="password" id="loginPass" class="form-inp"
+                placeholder="كلمة المرور"></div>
+          </div>
+          <button class="btn-primary-full" onclick="doLogin()"><i class="fas fa-sign-in-alt me-2"></i>تسجيل
+            الدخول</button>
+          <div class="auth-demo mt-3">
+            <button class="btn-demo" onclick="demoLogin()"><i class="fas fa-user me-1"></i>جرب الحساب التجريبي</button>
+          </div>
+          <p class="auth-switch">مش عندك حساب؟ <a onclick="navigate('register')">سجل دلوقتي</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== REGISTER PAGE ===================== -->
+    <div class="page" id="page-register">
+      <div class="auth-wrapper">
+        <div class="auth-card">
+          <div class="auth-logo" onclick="navigate('home')">Clinic<span>+</span></div>
+          <h4 class="auth-title">إنشاء حساب جديد 🎉</h4>
+          <p class="auth-sub">انضم لمنصة الرعاية الصحية الأذكى في مصر</p>
+          <div id="regError" class="alert-error d-none"></div>
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <label class="form-label-c">الاسم الأول</label>
+              <div class="inp-group"><i class="fas fa-user"></i><input type="text" id="regFirst" class="form-inp"
+                  placeholder="محمود"></div>
+            </div>
+            <div class="col-6">
+              <label class="form-label-c">الاسم الأخير</label>
+              <div class="inp-group"><i class="fas fa-user"></i><input type="text" id="regLast" class="form-inp"
+                  placeholder="إبراهيم"></div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label-c">البريد الإلكتروني</label>
+            <div class="inp-group"><i class="fas fa-envelope"></i><input type="email" id="regEmail" class="form-inp"
+                placeholder="example@email.com"></div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label-c">رقم الهاتف</label>
+            <div class="inp-group"><i class="fas fa-phone"></i><input type="tel" id="regPhone" class="form-inp"
+                placeholder="01XXXXXXXXX"></div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label-c">تاريخ الميلاد</label>
+            <div class="inp-group"><i class="fas fa-calendar"></i><input type="date" id="regDob" class="form-inp"></div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label-c">كلمة المرور</label>
+            <div class="inp-group"><i class="fas fa-lock"></i><input type="password" id="regPass" class="form-inp"
+                placeholder="6 أحرف على الأقل"></div>
+          </div>
+          <button class="btn-primary-full" onclick="doRegister()"><i class="fas fa-user-plus me-2"></i>إنشاء
+            الحساب</button>
+          <p class="auth-switch">عندك حساب؟ <a onclick="navigate('login')">سجل دخولك</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== BOOKING PAGE ===================== -->
+    <div class="page" id="page-booking">
+      <div class="page-hero">
+        <div class="container">
+          <div class="bk-steps-bar" id="bkStepsBar">
+            <div class="bk-step active" id="bkS1">
+              <div class="bk-sn">1</div><span>المحافظة</span>
+            </div>
+            <div class="bk-step-line"></div>
+            <div class="bk-step" id="bkS2">
+              <div class="bk-sn">2</div><span>التخصص</span>
+            </div>
+            <div class="bk-step-line"></div>
+            <div class="bk-step" id="bkS3">
+              <div class="bk-sn">3</div><span>الدكتور</span>
+            </div>
+          </div>
+          <h2 class="page-hero-title"><i class="fas fa-search me-2"></i>احجز عند دكتور</h2>
+          <p class="page-hero-sub">اختار محافظتك والتخصص وحجز في دقيقة</p>
+        </div>
+      </div>
+      <div class="container py-4 mt-5">
+        <!-- Step 1: Governorate -->
+        <div id="bkStep1">
+          <div class="content-card">
+            <div class="cc-title"><i class="fas fa-map-marker-alt me-2"></i>اختار المحافظة</div>
+            <div class="gov-grid" id="govGrid"></div>
+          </div>
+        </div>
+        <!-- Step 2: Specialty -->
+        <div id="bkStep2" style="display:none">
+          <div class="back-breadcrumb" onclick="bkGoStep(1)"><i class="fas fa-arrow-right me-2"></i>تغيير المحافظة:
+            <strong id="bkGovLabel"></strong>
+          </div>
+          <div class="content-card">
+            <div class="cc-title"><i class="fas fa-stethoscope me-2"></i>اختار التخصص</div>
+            <div class="spec-grid-bk" id="specGrid"></div>
+          </div>
+        </div>
+        <!-- Step 3: Doctors -->
+        <div id="bkStep3" style="display:none">
+          <div class="back-breadcrumb" onclick="bkGoStep(2)"><i class="fas fa-arrow-right me-2"></i><strong
+              id="bkSpecLabel"></strong> في <strong id="bkGovLabel2"></strong></div>
+          <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+            <div class="results-count"><i class="fas fa-user-md me-1"></i><span id="docCount">0</span> دكتور متاح</div>
+            <div class="d-flex gap-2 align-items-center">
+              <select class="form-select-c" style="width:auto" onchange="sortDocs(this.value)">
+                <option value="rating">الأعلى تقييماً</option>
+                <option value="price_asc">الأقل سعراً</option>
+                <option value="price_desc">الأعلى سعراً</option>
+              </select>
+            </div>
+          </div>
+          <div id="docsList" class="d-flex flex-column gap-3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOKING CONFIRMATION MODAL -->
+    <div class="modal fade" id="bookModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-c">
+          <div class="modal-header-c">
+            <h5 id="bookModalTitle">تأكيد الحجز</h5><button type="button" class="btn-close-c" data-bs-dismiss="modal"><i
+                class="fas fa-times"></i></button>
+          </div>
+          <div class="modal-body p-4">
+            <div class="doc-mini-card mb-4" id="bookDocPreview"></div>
+            <div class="mb-3">
+              <label class="form-label-c">اختار التاريخ</label>
+              <input type="date" id="bookDate" class="form-inp">
+            </div>
+            <div class="mb-3">
+              <label class="form-label-c">اختار الوقت</label>
+              <div class="time-slots" id="timeSlots"></div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label-c">سبب الزيارة (اختياري)</label>
+              <textarea id="bookReason" class="form-inp" rows="2" placeholder="اكتب شكواك باختصار..."></textarea>
+            </div>
+          </div>
+          <div class="modal-foot-c">
+            <button class="btn-modal-cancel" data-bs-dismiss="modal">إلغاء</button>
+            <button class="btn-modal-confirm" onclick="confirmBooking()"><i class="fas fa-check me-2"></i>تأكيد
+              الحجز</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== PRESCRIPTION PAGE ===================== -->
+    <div class="page" id="page-prescription">
+      <div class="page-hero">
+        <div class="container">
+          <h2 class="page-hero-title"><i class="fas fa-file-prescription me-2"></i>الروشتة الإلكترونية</h2>
+          <p class="page-hero-sub">روشتاتك محفوظة بأمان وواضحة دايماً</p>
+        </div>
+      </div>
+      <div class="container py-4 mt-5">
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div id="rxList"></div>
+          </div>
+          <div class="col-lg-4">
+            <div class="content-card mb-3">
+              <div class="cc-title"><i class="fas fa-bell me-2"></i>تذكيرات الدواء</div>
+              <div id="remindersList"></div>
+              <button class="btn-primary-full mt-3" onclick="saveReminders()"><i class="fas fa-bell me-2"></i>حفظ
+                الإشعارات</button>
+            </div>
+            <div class="content-card">
+              <div class="cc-title"><i class="fas fa-robot me-2"></i>اسأل AI عن الروشتة</div>
+              <p class="text-muted small mb-3">مش فاهم حاجة؟ المساعد الذكي يشرح ليك بطريقة بسيطة.</p>
+              <button class="btn-primary-full" onclick="navigate('ai')"><i class="fas fa-comment-medical me-2"></i>افتح
+                المساعد</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== PHARMACY PAGE ===================== -->
+    <div class="page" id="page-pharmacy">
+      <div class="page-hero">
+        <div class="container">
+          <h2 class="page-hero-title"><i class="fas fa-capsules me-2"></i>الصيدليات القريبة</h2>
+          <p class="page-hero-sub">اطلب أدويتك وبتتوصلك على بابك</p>
+        </div>
+      </div>
+      <div class="container py-4 mt-5">
+        <div class="rx-alert mb-4" id="rxBanner">
+          <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+              <div class="fw-bold mb-1" style="color:var(--primary)"><i class="fas fa-file-prescription me-2"></i>روشتة
+                مفعّلة: <span id="rxBannerNum">#RX-0001</span></div>
+              <div class="text-muted small" id="rxBannerDesc">4 أدوية</div>
+            </div>
+            <button class="btn-send-rx" onclick="sendToPharmacy()"><i class="fas fa-paper-plane me-1"></i>أرسل
+              للصيدلية</button>
+          </div>
+        </div>
+        <div class="d-flex gap-2 mb-4 flex-wrap" id="pharmFilters">
+          <button class="filter-btn active" onclick="filterPharm('all',this)">الكل</button>
+          <button class="filter-btn" onclick="filterPharm('delivery',this)"><i class="fas fa-truck me-1"></i>توصيل
+            متاح</button>
+          <button class="filter-btn" onclick="filterPharm('open',this)"><i class="fas fa-circle fa-xs me-1"></i>مفتوح
+            الآن</button>
+          <button class="filter-btn" onclick="filterPharm('h24',this)"><i class="fas fa-moon me-1"></i>24 ساعة</button>
+        </div>
+        <div class="row g-3" id="pharmList"></div>
+      </div>
+    </div>
+
+    <!-- ===================== MEDICAL FILE PAGE ===================== -->
+    <div class="page" id="page-medfile">
+      <div class="prof-hero">
+        <div class="container text-center">
+          <div class="prof-avatar" id="profAvatar">م</div>
+          <h3 class="prof-name" id="profName">محمود إبراهيم</h3>
+          <div class="text-white-50 small mb-3" id="profId">#PAT-0001</div>
+          <div class="d-flex gap-2 justify-content-center flex-wrap" id="profTags"></div>
+        </div>
+      </div>
+      <div class="container py-4 mt-5">
+        <div class="row g-4">
+          <div class="col-lg-8">
+            <div class="file-sec mb-3">
+              <div class="fs-title"><i class="fas fa-virus fa-sm me-2"></i>الأمراض السابقة</div>
+              <div id="diseaseTags"></div>
+              <button class="btn-add-tag mt-2" onclick="addMedInfo('disease')"><i
+                  class="fas fa-plus me-1"></i>إضافة</button>
+            </div>
+            <div class="file-sec mb-3">
+              <div class="fs-title" style="color:#dc2626"><i class="fas fa-allergies fa-sm me-2"></i>الحساسية <small
+                  style="font-size:.72rem">(مهم جداً ⚠️)</small></div>
+              <div id="allergyTags"></div>
+              <button class="btn-add-tag mt-2" onclick="addMedInfo('allergy')"><i
+                  class="fas fa-plus me-1"></i>إضافة</button>
+            </div>
+            <div class="file-sec mb-3">
+              <div class="fs-title"><i class="fas fa-pills fa-sm me-2"></i>الروشتات الأخيرة</div>
+              <div id="rxTimeline"></div>
+            </div>
+            <div class="file-sec">
+              <div class="fs-title"><i class="fas fa-flask fa-sm me-2"></i>التحاليل والأشعة</div>
+              <div id="labTimeline"></div>
+              <button class="btn-add-tag mt-3" onclick="showToast('رفع تحليل قريباً! 📎','info')"><i
+                  class="fas fa-upload me-1"></i>رفع تحليل جديد</button>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="content-card mb-3">
+              <div class="cc-title"><i class="fas fa-edit me-2"></i>تعديل البيانات</div>
+              <div class="mb-2"><label class="form-label-c">فصيلة الدم</label><select class="form-select-c"
+                  id="bloodType">
+                  <option>A+</option>
+                  <option>A-</option>
+                  <option>B+</option>
+                  <option>B-</option>
+                  <option>AB+</option>
+                  <option>AB-</option>
+                  <option>O+</option>
+                  <option>O-</option>
+                </select></div>
+              <div class="mb-2"><label class="form-label-c">الوزن (كجم)</label><input type="number" class="form-inp"
+                  id="weight" placeholder="75"></div>
+              <div class="mb-3"><label class="form-label-c">الطول (سم)</label><input type="number" class="form-inp"
+                  id="height" placeholder="178"></div>
+              <button class="btn-primary-full" onclick="saveProfile()"><i class="fas fa-save me-2"></i>حفظ
+                البيانات</button>
+            </div>
+            <div class="content-card">
+              <div class="cc-title"><i class="fas fa-calendar-check me-2"></i>مواعيدي القادمة</div>
+              <div id="upcomingAppts"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== AI ASSISTANT PAGE ===================== -->
+    <div class="page" id="page-ai">
+      <div class="page-hero">
+        <div class="container">
+          <h2 class="page-hero-title"><i class="fas fa-robot me-2"></i>مساعد AI الطبي</h2>
+          <p class="page-hero-sub">يشرح روشتتك ويجاوب على أسئلتك الطبية 24/7</p>
+        </div>
+      </div>
+      <div class="container py-4 mt-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="chat-container">
+              <div class="chat-header">
+                <div class="chat-ai-avatar"><i class="fas fa-robot"></i></div>
+                <div>
+                  <div class="chat-ai-name">مساعد Clinic+ الذكي</div>
+                  <div class="chat-ai-status"><span class="status-dot"></span>متاح الآن</div>
+                </div>
+                <button class="btn-clear-chat" onclick="clearChat()"><i class="fas fa-trash-alt"></i></button>
+              </div>
+              <div class="chat-body" id="chatBody">
+                <div class="chat-welcome">
+                  <div class="cw-icon"><i class="fas fa-robot"></i></div>
+                  <h5>أهلاً! أنا مساعدك الطبي الذكي 🤖</h5>
+                  <p>اسألني عن أي دواء في روشتتك، أعراض، أو أي سؤال طبي وهفيدك بالعربي.</p>
+                  <div class="quick-q-grid">
+                    <button class="qq-btn" onclick="sendQuick('اشرح لي روشتة Panadol وAmoxicillin')">🔍 اشرح
+                      روشتتي</button>
+                    <button class="qq-btn" onclick="sendQuick('ما هي أعراض التهاب الحلق وكيف أعالجه؟')">🤒 أعراض التهاب
+                      الحلق</button>
+                    <button class="qq-btn"
+                      onclick="sendQuick('ما هي التفاعلات الدوائية بين الباراسيتامول والأسبرين؟')">💊 تفاعلات
+                      دوائية</button>
+                    <button class="qq-btn" onclick="sendQuick('متى يجب أن أذهب للطوارئ؟')">🚨 متى أروح للطوارئ؟</button>
+                  </div>
+                </div>
+              </div>
+              <div class="chat-input-area">
+                <textarea id="chatInput" class="chat-inp" rows="1" placeholder="اكتب سؤالك الطبي هنا..."
+                  onkeydown="chatEnter(event)" oninput="autoResize(this)"></textarea>
+                <button class="btn-send" id="sendBtn" onclick="sendMessage()"><i
+                    class="fas fa-paper-plane"></i></button>
+              </div>
+            </div>
+            <div class="chat-disclaimer"><i class="fas fa-info-circle me-1"></i>المساعد AI لأغراض تثقيفية فقط — دايماً
+              استشر دكتور مختص للتشخيص والعلاج.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== RATING PAGE ===================== -->
+    <div class="page" id="page-rating">
+      <div class="page-hero">
+        <div class="container">
+          <h2 class="page-hero-title"><i class="fas fa-star me-2"></i>تقييم الدكاترة</h2>
+          <p class="page-hero-sub">رأيك بيساعد ناس تاني يختاروا أحسن دكتور</p>
+        </div>
+      </div>
+      <div class="container py-4 mt-5">
+        <div class="row g-4">
+          <div class="col-lg-7">
+            <div class="content-card">
+              <div class="cc-title"><i class="fas fa-pen-to-square me-2"></i>قيّم زيارتك الأخيرة</div>
+              <div id="ratingDocPreview" class="doc-mini-card mb-4"></div>
+              <div class="text-center mb-3">
+                <div class="rating-q">كيف كانت تجربتك مع الدكتور؟</div>
+                <div class="stars-input" id="starsInput">
+                  <span class="star-i" data-v="1" onclick="setRating(1)">★</span>
+                  <span class="star-i" data-v="2" onclick="setRating(2)">★</span>
+                  <span class="star-i" data-v="3" onclick="setRating(3)">★</span>
+                  <span class="star-i" data-v="4" onclick="setRating(4)">★</span>
+                  <span class="star-i" data-v="5" onclick="setRating(5)">★</span>
+                </div>
+                <div class="rating-label" id="ratingLabel">اضغط لتقييم</div>
+              </div>
+              <div class="rating-aspects mb-3">
+                <div class="ra-item"><span>الدقة في المواعيد</span>
+                  <div class="mini-stars" id="ms1"><span onclick="setMini(1,1)">★</span><span
+                      onclick="setMini(1,2)">★</span><span onclick="setMini(1,3)">★</span><span
+                      onclick="setMini(1,4)">★</span><span onclick="setMini(1,5)">★</span></div>
+                </div>
+                <div class="ra-item"><span>وضوح الشرح</span>
+                  <div class="mini-stars" id="ms2"><span onclick="setMini(2,1)">★</span><span
+                      onclick="setMini(2,2)">★</span><span onclick="setMini(2,3)">★</span><span
+                      onclick="setMini(2,4)">★</span><span onclick="setMini(2,5)">★</span></div>
+                </div>
+                <div class="ra-item"><span>نظافة العيادة</span>
+                  <div class="mini-stars" id="ms3"><span onclick="setMini(3,1)">★</span><span
+                      onclick="setMini(3,2)">★</span><span onclick="setMini(3,3)">★</span><span
+                      onclick="setMini(3,4)">★</span><span onclick="setMini(3,5)">★</span></div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <label class="form-label-c">اكتب تعليقك (اختياري)</label>
+                <textarea id="ratingComment" class="form-inp" rows="3"
+                  placeholder="شاركنا تجربتك مع الدكتور..."></textarea>
+              </div>
+              <button class="btn-primary-full" onclick="submitRating()"><i class="fas fa-paper-plane me-2"></i>إرسال
+                التقييم</button>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="content-card">
+              <div class="cc-title"><i class="fas fa-chart-bar me-2"></i>تقييمات المرضى</div>
+              <div id="reviewsList"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end appContainer -->
+
+  <!-- FOOTER -->
+  <footer id="mainFooter">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="foot-brand">Clinic<span>+</span></div>
+          <p class="foot-desc">منصة الرعاية الصحية الذكية — نربط المريض بالدكتور والصيدلية في مكان واحد.</p>
+          <div class="social-links">
+            <a href="#" class="soc-btn"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="soc-btn"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="soc-btn"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="soc-btn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-6 col-lg-2">
+          <div class="foot-h">الخدمات</div>
+          <a class="foot-lnk" onclick="navigate('booking')">حجز دكتور</a>
+          <a class="foot-lnk" onclick="navigate('prescription')">روشتة إلكترونية</a>
+          <a class="foot-lnk" onclick="navigate('pharmacy')">الصيدليات</a>
+          <a class="foot-lnk" onclick="navigate('ai')">مساعد AI</a>
+        </div>
+        <div class="col-6 col-lg-2">
+          <div class="foot-h">الحساب</div>
+          <a class="foot-lnk" onclick="navigate('medfile')">ملفي الطبي</a>
+          <a class="foot-lnk" onclick="navigate('rating')">التقييمات</a>
+          <a class="foot-lnk" onclick="navigate('login')">تسجيل الدخول</a>
+          <a class="foot-lnk" onclick="navigate('register')">حساب جديد</a>
+        </div>
+        <div class="col-12 col-lg-4">
+          <div class="foot-h">للتواصل</div>
+          <div class="foot-contact"><i class="fas fa-envelope me-2"></i>info@clinicplus.eg</div>
+          <div class="foot-contact"><i class="fas fa-phone me-2"></i>16XXX</div>
+          <div class="foot-contact"><i class="fas fa-map-marker-alt me-2"></i>القاهرة، جمهورية مصر العربية</div>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2025 Clinic+ — مدرسة WE للتكنولوجيا التطبيقية</span>
+        <span>صُنع بـ <i class="fas fa-heart text-danger"></i> من فريق WE</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
